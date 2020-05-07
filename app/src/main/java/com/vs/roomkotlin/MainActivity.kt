@@ -62,11 +62,11 @@ class MainActivity : AppCompatActivity() {
         resultCode: Int,
         data: Intent?
     ) {
-        super.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data!!)
         if (requestCode == ADD_NAME_REQUEST && resultCode == Activity.RESULT_OK) {
-            val title = data!!.getStringExtra(AddName.Companion.EXTRA_FIRST_NAME)
-            val description = data.getStringExtra(AddName.Companion.EXTRA_LAST_NAME)
-            val note = RoomEntity(title, description)
+            val title = data.getStringExtra(AddName.EXTRA_FIRST_NAME)
+            val description = data.getStringExtra(AddName.EXTRA_LAST_NAME)
+            val note = RoomEntity(title!!, description!!)
             nameViewModel?.insert(note)
             Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show()
         } else {

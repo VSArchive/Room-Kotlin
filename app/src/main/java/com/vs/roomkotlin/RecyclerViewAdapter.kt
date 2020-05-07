@@ -44,12 +44,13 @@ class RecyclerViewAdapter :
 
     class NameHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-        val textViewTitle: TextView
-        val textViewDescription: TextView
+        val textViewTitle: TextView = itemView.findViewById(R.id.textView)
+        val textViewDescription: TextView = itemView.findViewById(R.id.textView1)
 
         init {
-            textViewTitle = itemView.findViewById(R.id.textView)
-            textViewDescription = itemView.findViewById(R.id.textView1)
+            itemView.setOnClickListener {
+
+            }
         }
     }
 }
