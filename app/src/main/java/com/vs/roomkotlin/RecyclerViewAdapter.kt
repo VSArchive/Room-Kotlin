@@ -1,23 +1,26 @@
 package com.vs.roomkotlin
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.vs.roomkotlin.room.RoomEntity
+import com.vs.roomkotlin.RecyclerViewAdapter.NameHolder
+import com.vs.roomkotlin.room.MyRoomEntity
 import java.util.*
 
 class RecyclerViewAdapter :
-    RecyclerView.Adapter<RecyclerViewAdapter.NameHolder>() {
-    private var names: List<RoomEntity>? = ArrayList()
+    RecyclerView.Adapter<NameHolder>() {
+    private var names: List<MyRoomEntity>? = ArrayList()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): NameHolder {
         val itemView: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.recyclerview_item, parent, false)
-        return NameHolder(itemView)
+        return NameHolder(itemView, parent.context)
     }
 
     override fun onBindViewHolder(
@@ -33,23 +36,27 @@ class RecyclerViewAdapter :
         return names!!.size
     }
 
-    fun setNames(names: List<RoomEntity>?) {
+    fun setNames(names: List<MyRoomEntity>?) {
         this.names = names
-        notifyDataSetChanged()
+        notifyItemChanged(0)
     }
 
-    fun getNoteAt(position: Int): RoomEntity {
+    fun getNoteAt(position: Int): MyRoomEntity {
         return names!![position]
     }
 
-    class NameHolder(itemView: View) :
+    class NameHolder(itemView: View, context: Context) :
         RecyclerView.ViewHolder(itemView) {
         val textViewTitle: TextView = itemView.findViewById(R.id.textView)
         val textViewDescription: TextView = itemView.findViewById(R.id.textView1)
 
         init {
             itemView.setOnClickListener {
-
+                Toast.makeText(
+                    context,
+                    textViewTitle.text.toString() + " " + textViewDescription.text.toString(),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

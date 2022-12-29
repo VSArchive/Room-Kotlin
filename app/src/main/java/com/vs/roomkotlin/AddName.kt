@@ -18,14 +18,14 @@ class AddName : AppCompatActivity() {
         editTextDescription = findViewById(R.id.last_name)
         val fab =
             findViewById<FloatingActionButton>(R.id.floatingActionButton)
-        fab.setOnClickListener { saveNote() }
-        title = "Add Note"
+        fab.setOnClickListener { saveName() }
+        title = "Add Name"
     }
 
-    private fun saveNote() {
+    private fun saveName() {
         val title = editTextTitle!!.text.toString()
         val description = editTextDescription!!.text.toString()
-        if (title.trim { it <= ' ' }.isEmpty() || description.trim { it <= ' ' }.isEmpty()) {
+        if (title.trim().isEmpty() || description.trim().isEmpty()) {
             Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show()
             return
         }
